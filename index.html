@@ -1,0 +1,68 @@
+<!DOCTYPE html> <!-- Version 5 de HTML-->
+<html lang="en"> <!-- Précision de la langue pour le navigateur-->
+
+<head> <!-- Entête du document HTML -->
+    <title>Home</title> <!-- Indique au navigateur quel titre vous donnez à votre page -->
+    <meta charset="UTF-8"> <!-- précise l'encodage des caractère à UTF-8-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Permet de définir la largeur de la page à l'échelle de l'écran du visiteur -->
+</head><!-- Fin de la balise d'entête -->
+
+
+
+<body><!-- Début du code de la page web -->
+    <script>
+        window.addEventListener("load", function () {
+            let numOfCourses = prompt("How many courses did you finish ?", "0")
+            // check if the text is really a number with regular expression
+            let regex = /^[0-9]+$/
+            if (!regex.test(numOfCourses)) {
+                document.write('<p style="color:red">Invalid Input !</p>')
+            }
+            else {
+                numOfCourses = parseInt(numOfCourses)
+
+                let courseMarks = []
+                for (let i = 0; i < numOfCourses; i++) {
+                    let mark = prompt("Enter the mark of course " + (i + 1), "0")
+                    if (!regex.test(mark)) {
+                        document.write('<p style="color:red">Invalid Input Grade !</p>')
+                        break
+                    } else {
+                        courseMarks.push(parseInt(mark))
+                    }
+                }
+
+                let avg = courseMarks.reduce((a, b, i) => {
+                    document.write('<p> grade of course ' + i + ' : ' + b + '</p>')
+                    return a + b
+                }, 0) / courseMarks.length;
+
+                avg = avg.toFixed(2);
+
+                switch (true) {
+                    case avg >= 90 && avg <= 100:
+                        document.write('<p> Your average is ' + avg + ' and your grade is A+ </p>')
+                        break
+                    case avg >= 80 && avg < 90:
+                        document.write('<p> Your average is ' + avg + ' and your grade is B </p>')
+                        break
+                    case avg >= 70 && avg < 80:
+                        document.write('<p> Your average is ' + avg + ' and your grade is C </p>')
+                        break
+                    case avg >= 60 && avg < 70:
+                        document.write('<p> Your average is ' + avg + ' and your grade is D </p>')
+                        break
+                    case avg < 60:
+                        document.write('<p> Your average is ' + avg + ' and your grade is F </p>')
+                        break
+                    default:
+                        document.write('<p> Sorry, All the marks have to be from minimum 0 to maximum 100!</p>')
+                }
+            }
+        });
+    </script>
+
+</body><!-- Fin du code de la page web -->
+
+</html><!-- Fin du document -->
